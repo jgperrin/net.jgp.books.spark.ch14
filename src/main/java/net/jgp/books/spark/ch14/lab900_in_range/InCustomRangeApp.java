@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch14.lab900_in_range;
+package net.jgp.books.spark.ch14.lab900_in_range;
 
 import static org.apache.spark.sql.functions.*;
 

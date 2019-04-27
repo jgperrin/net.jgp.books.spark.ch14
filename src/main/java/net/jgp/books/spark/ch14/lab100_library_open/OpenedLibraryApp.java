@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch14.lab100_library_open;
+package net.jgp.books.spark.ch14.lab100_library_open;
 
 import static org.apache.spark.sql.functions.*;
 

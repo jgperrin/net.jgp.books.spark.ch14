@@ -1,49 +1,21 @@
-package net.jgp.books.sparkInAction.ch14.lab100_library_open;
+package net.jgp.books.spark.ch14.lab100_library_open;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import org.apache.spark.sql.api.java.UDF8;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IsOpenUdf implements
-    UDF8<String, String, String, String, String, String, String, Timestamp,
-        Boolean> {
-  private static Logger log = LoggerFactory.getLogger(IsOpenUdf.class);
-  private static final long serialVersionUID = -216751L;
+public abstract class IsOpenService {
+  private static Logger log = LoggerFactory.getLogger(IsOpenService.class);
 
-  public IsOpenUdf() {
+  private IsOpenService() {
+
   }
 
-  // @Override
-  // public Boolean call(String range, Integer event) throws Exception {
-  // log.debug("-> call({}, {})", range, event);
-  // String[] ranges = range.split(";");
-  // for (int i = 0; i < ranges.length; i++) {
-  // log.debug("Processing range #{}: {}", i, ranges[i]);
-  // String[] hours = ranges[i].split("-");
-  // int start =
-  // Integer.valueOf(hours[0].substring(0, 2)) * 3600 +
-  // Integer.valueOf(hours[0].substring(3)) * 60;
-  // int end =
-  // Integer.valueOf(hours[1].substring(0, 2)) * 3600 +
-  // Integer.valueOf(hours[1].substring(3)) * 60;
-  // log.debug("Checking between {} and {}", start, end);
-  // if (event >= start && event <= end) {
-  // return true;
-  // }
-  // }
-  // return false;
-  // }
-
-  @Override
-  public Boolean call(
-      String hoursMon, String hoursTue,
-      String hoursWed, String hoursThu,
-      String hoursFri, String hoursSat,
-      String hoursSun,
-      Timestamp dateTime) throws Exception {
+  public static boolean isOpen(String hoursMon, String hoursTue,
+      String hoursWed, String hoursThu, String hoursFri, String hoursSat,
+      String hoursSun, Timestamp dateTime) {
 
     // get the day of the week
     Calendar cal = Calendar.getInstance();
@@ -80,10 +52,12 @@ public class IsOpenUdf implements
         hours = hoursSun;
     }
 
-    if(hours.compareToIgnoreCase("closed") == 0) {
+    // quick return
+    if (hours.compareToIgnoreCase("closed") == 0) {
       return false;
     }
-    
+
+    // check if in interval
     int event = cal.get(Calendar.HOUR_OF_DAY) * 3600
         + cal.get(Calendar.MINUTE) * 60
         + cal.get(Calendar.SECOND);
@@ -97,13 +71,13 @@ public class IsOpenUdf implements
               Integer.valueOf(operningHours[0].substring(3, 5)) * 60;
       int end =
           Integer.valueOf(operningHours[1].substring(0, 2)) * 3600 +
-              Integer.valueOf(operningHours[1].substring(3, 5 )) * 60;
+              Integer.valueOf(operningHours[1].substring(3, 5)) * 60;
       log.debug("Checking between {} and {}", start, end);
       if (event >= start && event <= end) {
         return true;
       }
     }
-    
+
     return false;
   }
 
