@@ -4,6 +4,13 @@ import java.sql.Timestamp;
 
 import org.apache.spark.sql.api.java.UDF8;
 
+/**
+ * The UDF code itself provides the plumbing between the service code and
+ * the application code.
+ * 
+ * @author jgp
+ *
+ */
 public class IsOpenUdf implements
     UDF8<String, String, String, String, String, String, String, Timestamp,
         Boolean> {

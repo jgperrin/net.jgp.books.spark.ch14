@@ -1,8 +1,10 @@
 package net.jgp.books.spark.ch14.lab100_library_open;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.callUDF;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.to_timestamp;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -10,7 +10,6 @@ public abstract class IsOpenService {
   private static Logger log = LoggerFactory.getLogger(IsOpenService.class);
 
   private IsOpenService() {
-
   }
 
   public static boolean isOpen(String hoursMon, String hoursTue,
@@ -21,7 +20,7 @@ public abstract class IsOpenService {
     Calendar cal = Calendar.getInstance();
     cal.setTimeInMillis(dateTime.getTime());
     int day = cal.get(Calendar.DAY_OF_WEEK);
-    log.debug("Day of the week: {}", day);
+    log.trace("Day of the week: {}", day);
 
     String hours;
     switch (day) {
@@ -64,7 +63,7 @@ public abstract class IsOpenService {
 
     String[] ranges = hours.split(" and ");
     for (int i = 0; i < ranges.length; i++) {
-      log.debug("Processing range #{}: {}", i, ranges[i]);
+      log.trace("Processing range #{}: {}", i, ranges[i]);
       String[] operningHours = ranges[i].split("-");
       int start =
           Integer.valueOf(operningHours[0].substring(0, 2)) * 3600 +
@@ -72,7 +71,7 @@ public abstract class IsOpenService {
       int end =
           Integer.valueOf(operningHours[1].substring(0, 2)) * 3600 +
               Integer.valueOf(operningHours[1].substring(3, 5)) * 60;
-      log.debug("Checking between {} and {}", start, end);
+      log.trace("Checking between {} and {}", start, end);
       if (event >= start && event <= end) {
         return true;
       }
