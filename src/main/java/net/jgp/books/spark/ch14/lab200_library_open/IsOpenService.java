@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab100_library_open;
+package net.jgp.books.spark.ch14.lab200_library_open;
 
 import java.sql.Timestamp;
 import java.util.Calendar;

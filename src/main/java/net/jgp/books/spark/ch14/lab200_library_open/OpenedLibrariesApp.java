@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab100_library_open;
+package net.jgp.books.spark.ch14.lab200_library_open;
 
 import static org.apache.spark.sql.functions.callUDF;
 import static org.apache.spark.sql.functions.col;
@@ -21,7 +21,7 @@ import org.apache.spark.sql.types.StructType;
  * 
  * @author jgp
  */
-public class OpenedLibraryApp {
+public class OpenedLibrariesApp {
 
   /**
    * main() is your entry point to the application.
@@ -29,7 +29,7 @@ public class OpenedLibraryApp {
    * @param args
    */
   public static void main(String[] args) {
-    OpenedLibraryApp app = new OpenedLibraryApp();
+    OpenedLibrariesApp app = new OpenedLibrariesApp();
     app.start();
   }
 
@@ -42,10 +42,12 @@ public class OpenedLibraryApp {
         .appName("Custom UDF to check if in range")
         .master("local[*]")
         .getOrCreate();
-    spark.udf().register(
-        "isOpen",
-        new IsOpenUdf(),
-        DataTypes.BooleanType);
+    spark
+        .udf()
+        .register(
+            "isOpen",
+            new IsOpenUdf(),
+            DataTypes.BooleanType);
 
     Dataset<Row> librariesDf = spark.read().format("csv")
         .option("header", true)
@@ -81,8 +83,14 @@ public class OpenedLibraryApp {
             col("Opening_Hours_Wednesday"), col("Opening_Hours_Thursday"),
             col("Opening_Hours_Friday"), col("Opening_Hours_Saturday"),
             lit("Closed"),
-            col("date")));
-    df.show(false);
+            col("date")))
+        .drop("Opening_Hours_Monday")
+        .drop("Opening_Hours_Tuesday")
+        .drop("Opening_Hours_Wednesday")
+        .drop("Opening_Hours_Thursday")
+        .drop("Opening_Hours_Friday")
+        .drop("Opening_Hours_Saturday");
+    df.show();
   }
 
   private static Dataset<Row> createDataframe(SparkSession spark) {
