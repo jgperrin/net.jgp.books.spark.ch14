@@ -76,12 +76,16 @@ public class OpenedLibrariesApp {
     Dataset<Row> df = librariesDf.crossJoin(dateTimeDf);
     df.show(false);
 
-    df = df.withColumn("open",
+    df = df.withColumn(
+        "open",
         callUDF(
             "isOpen",
-            col("Opening_Hours_Monday"), col("Opening_Hours_Tuesday"),
-            col("Opening_Hours_Wednesday"), col("Opening_Hours_Thursday"),
-            col("Opening_Hours_Friday"), col("Opening_Hours_Saturday"),
+            col("Opening_Hours_Monday"),
+            col("Opening_Hours_Tuesday"),
+            col("Opening_Hours_Wednesday"),
+            col("Opening_Hours_Thursday"),
+            col("Opening_Hours_Friday"),
+            col("Opening_Hours_Saturday"),
             lit("Closed"),
             col("date")))
         .drop("Opening_Hours_Monday")
