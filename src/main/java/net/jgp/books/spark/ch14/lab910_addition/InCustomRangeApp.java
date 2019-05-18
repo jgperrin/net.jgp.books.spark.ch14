@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab900_in_range;
+package net.jgp.books.spark.ch14.lab910_addition;
 
 import static org.apache.spark.sql.functions.*;
 
@@ -13,7 +13,7 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-import net.jgp.books.spark.ch14.lab910_addition.StringAdditionUdf;
+import net.jgp.books.spark.ch14.lab900_in_range.InRangeUdf;
 
 /**
  * Custom UDF to check if in range.
