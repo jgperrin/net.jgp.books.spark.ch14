@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab920_addition_fail;
+package net.jgp.books.spark.ch14.lab912_addition_fail2;
 
 import static org.apache.spark.sql.functions.callUDF;
 import static org.apache.spark.sql.functions.col;
@@ -43,7 +43,7 @@ public class AdditionApp {
     spark.udf().register(
         "add",
         new IntegerAdditionUdf(),
-        DataTypes.IntegerType);
+        DataTypes.StringType);
     spark.udf().register(
         "add",
         new StringAdditionUdf(),

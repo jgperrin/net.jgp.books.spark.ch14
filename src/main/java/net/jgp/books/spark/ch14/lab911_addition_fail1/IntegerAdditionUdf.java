@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab920_addition_fail;
+package net.jgp.books.spark.ch14.lab911_addition_fail1;
 
 import org.apache.spark.sql.api.java.UDF2;
 
