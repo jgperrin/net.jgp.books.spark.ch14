@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab200_library_open;
+package net.jgp.books.spark.ch14.lab210_library_open_sql;
 
 import static org.apache.spark.sql.functions.callUDF;
 import static org.apache.spark.sql.functions.col;
@@ -16,12 +16,14 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
+import net.jgp.books.spark.ch14.lab200_library_open.IsOpenUdf;
+
 /**
  * Custom UDF to check if in range.
  * 
  * @author jgp
  */
-public class OpenedLibrariesApp {
+public class OpenedLibrariesSqlApp {
 
   /**
    * main() is your entry point to the application.
@@ -29,7 +31,7 @@ public class OpenedLibrariesApp {
    * @param args
    */
   public static void main(String[] args) {
-    OpenedLibrariesApp app = new OpenedLibrariesApp();
+    OpenedLibrariesSqlApp app = new OpenedLibrariesSqlApp();
     app.start();
   }
 
@@ -74,31 +76,19 @@ public class OpenedLibrariesApp {
     dateTimeDf.printSchema();
 
     Dataset<Row> df = librariesDf.crossJoin(dateTimeDf);
+    df.createOrReplaceTempView("libraries");
     df.show(false);
 
-    // Using the dataframe API
-    Dataset<Row> finalDf = df.withColumn(
-        "open",
-        callUDF(
-            "isOpen",
-            col("Opening_Hours_Monday"),
-            col("Opening_Hours_Tuesday"),
-            col("Opening_Hours_Wednesday"),
-            col("Opening_Hours_Thursday"),
-            col("Opening_Hours_Friday"),
-            col("Opening_Hours_Saturday"),
-            lit("Closed"),
-            col("date")))
-        .drop("Opening_Hours_Monday")
-        .drop("Opening_Hours_Tuesday")
-        .drop("Opening_Hours_Wednesday")
-        .drop("Opening_Hours_Thursday")
-        .drop("Opening_Hours_Friday")
-        .drop("Opening_Hours_Saturday");
-    finalDf.show();
-    
     // Using SQL
+    Dataset<Row> finalDf = spark.sql(
+        "SELECT Council_ID, Name, date, "
+        + "isOpen("
+        + "Opening_Hours_Monday, Opening_Hours_Tuesday, "
+        + "Opening_Hours_Wednesday, Opening_Hours_Thursday, "
+        + "Opening_Hours_Friday, Opening_Hours_Saturday, "
+        + "'closed', date) AS open FROM libraries ");
     
+    finalDf.show();
   }
 
   private static Dataset<Row> createDataframe(SparkSession spark) {
