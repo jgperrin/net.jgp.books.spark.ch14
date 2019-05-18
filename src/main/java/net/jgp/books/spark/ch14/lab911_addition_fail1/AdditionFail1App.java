@@ -19,7 +19,7 @@ import org.apache.spark.sql.types.StructType;
  * 
  * @author jgp
  */
-public class AdditionApp {
+public class AdditionFail1App {
 
   /**
    * main() is your entry point to the application.
@@ -27,7 +27,7 @@ public class AdditionApp {
    * @param args
    */
   public static void main(String[] args) {
-    AdditionApp app = new AdditionApp();
+    AdditionFail1App app = new AdditionFail1App();
     app.start();
   }
 

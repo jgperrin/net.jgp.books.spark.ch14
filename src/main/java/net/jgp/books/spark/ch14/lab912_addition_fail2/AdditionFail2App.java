@@ -19,7 +19,7 @@ import org.apache.spark.sql.types.StructType;
  * 
  * @author jgp
  */
-public class AdditionApp {
+public class AdditionFail2App {
 
   /**
    * main() is your entry point to the application.
@@ -27,7 +27,7 @@ public class AdditionApp {
    * @param args
    */
   public static void main(String[] args) {
-    AdditionApp app = new AdditionApp();
+    AdditionFail2App app = new AdditionFail2App();
     app.start();
   }
 
@@ -43,11 +43,11 @@ public class AdditionApp {
     spark.udf().register(
         "add",
         new IntegerAdditionUdf(),
-        DataTypes.StringType);
+        DataTypes.StringType); // Same return type
     spark.udf().register(
         "add",
         new StringAdditionUdf(),
-        DataTypes.StringType);
+        DataTypes.StringType); // Same return type
 
     Dataset<Row> df = createDataframe(spark);
     df.show(false);
