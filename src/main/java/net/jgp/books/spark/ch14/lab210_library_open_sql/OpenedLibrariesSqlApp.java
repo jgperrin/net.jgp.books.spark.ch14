@@ -1,8 +1,6 @@
 package net.jgp.books.spark.ch14.lab210_library_open_sql;
 
-import static org.apache.spark.sql.functions.callUDF;
 import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.to_timestamp;
 
 import java.util.ArrayList;

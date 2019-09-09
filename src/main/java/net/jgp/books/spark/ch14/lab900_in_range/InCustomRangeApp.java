@@ -1,6 +1,12 @@
 package net.jgp.books.spark.ch14.lab900_in_range;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.callUDF;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.date_format;
+import static org.apache.spark.sql.functions.expr;
+import static org.apache.spark.sql.functions.hour;
+import static org.apache.spark.sql.functions.minute;
+import static org.apache.spark.sql.functions.second;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +18,6 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
-
-import net.jgp.books.spark.ch14.lab910_addition.StringAdditionUdf;
 
 /**
  * Custom UDF to check if in range.
