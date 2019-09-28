@@ -57,9 +57,10 @@ public class AdditionFail2App {
             "concat",
             callUDF("add", col("fname"), col("lname")));
     df.show(false);
-    
-    // The next operation will fail with an error: 
-    // Exception in thread "main" org.apache.spark.SparkException: Failed to execute user defined function($anonfun$261: (int, int) => string)
+
+    // The next operation will fail with an error:
+    // Exception in thread "main" org.apache.spark.SparkException: Failed to
+    // execute user defined function($anonfun$261: (int, int) => string)
 
     df = df
         .withColumn(

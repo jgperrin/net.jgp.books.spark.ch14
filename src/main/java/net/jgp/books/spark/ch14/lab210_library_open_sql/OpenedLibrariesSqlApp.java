@@ -80,12 +80,12 @@ public class OpenedLibrariesSqlApp {
     // Using SQL
     Dataset<Row> finalDf = spark.sql(
         "SELECT Council_ID, Name, date, "
-        + "isOpen("
-        + "Opening_Hours_Monday, Opening_Hours_Tuesday, "
-        + "Opening_Hours_Wednesday, Opening_Hours_Thursday, "
-        + "Opening_Hours_Friday, Opening_Hours_Saturday, "
-        + "'closed', date) AS open FROM libraries ");
-    
+            + "isOpen("
+            + "Opening_Hours_Monday, Opening_Hours_Tuesday, "
+            + "Opening_Hours_Wednesday, Opening_Hours_Thursday, "
+            + "Opening_Hours_Friday, Opening_Hours_Saturday, "
+            + "'closed', date) AS open FROM libraries ");
+
     finalDf.show();
   }
 

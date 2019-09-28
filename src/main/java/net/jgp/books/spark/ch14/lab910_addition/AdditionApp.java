@@ -57,7 +57,7 @@ public class AdditionApp {
             "concat",
             callUDF("add_string", col("fname"), col("lname")));
     df.show(false);
-    
+
     df = df
         .withColumn(
             "score",

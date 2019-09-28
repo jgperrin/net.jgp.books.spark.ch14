@@ -96,9 +96,9 @@ public class OpenedLibrariesApp {
         .drop("Opening_Hours_Friday")
         .drop("Opening_Hours_Saturday");
     finalDf.show();
-    
+
     // Using SQL
-    
+
   }
 
   private static Dataset<Row> createDataframe(SparkSession spark) {
