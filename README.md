@@ -16,7 +16,7 @@ Using a UDF using the dataframe API.
 
 ### Lab \#210
 
-Using a UDF using the SparkSQL.
+Using a UDF using SparkSQL.
 
 ### Lab \#900
 
