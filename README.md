@@ -1,20 +1,45 @@
-The examples in this repository are support to the **[Spark in Action, 2nd edition](http://jgp.net/sia)** book by Jean Georges Perrin and published by Manning. Find out more about the book on [Manning's website](http://jgp.net/sia).
+This repository contains the Java labs as well as their Scala and Python ports of the code used in Manning Publication’s **[Spark in Action, 2nd edition](https://www.manning.com/books/spark-in-action-second-edition?a_aid=jgp)**, by Jean-Georges Perrin.
 
 ---
 
-# Spark in Action, 2nd edition - chapter 14
+# Spark in Action, 2nd edition – Java, Python, and Scala code for chapter 14
+
+Chapter 14 is about **extending data transformation with UDFs** (user defined functions).
+
+## Lab
+
+Each chapter has one or more labs. Labs are examples used for teaching in the book(https://www.manning.com/books/spark-in-action-second-edition?a_aid=jgp). You are encouraged to take ownership of the code and modify it, experiment with it, hence the use of the term **lab**. This chapter has only one lab.
+
+### Lab \#200
+
+Using a UDF using the dataframe API.
+
+### Lab \#210
+
+Using a UDF using the SparkSQL.
+
+### Lab \#900
+
+A simple UDF to see if a value is in range.
+
+### Lab \#910, \#911, and \#912
+
+Attempts at using polymorphism with UDFs.
+
+### Lab \#920
+
+Passing an entire column to a UDF.
 
 
-Welcome to **Spark in Action 2e**, chapter 14. This chapter is about **extending data transformation with UDFs** (user defined functions).
+## Datasets
 
-Dataset(s) can be downloaded from:
-* South Dublin County Council's [libraries](https://data.smartdublin.ie/dataset/libraries).
+Dataset(s) used in this chapter:
+* South Dublin (Republic of Ireland) County Council's [libraries](https://data.smartdublin.ie/dataset/libraries).
 
+## Notes
 
-All examples are in Java.
+1. All examples are in Java. Examples in Python and Scala are coming.
 
 ---
 
-Thank you for supporting [Spark in Action, 2e](http://jgp.net/sia), please share the <3! 
-Follow and ping me on Twitter to get updates about the book, Apache Spark, and (opinionated) views about software and data engineering: [@jgperrin](https://twitter.com/jgperrin). 
-Join the book's community on [Facebook](https://www.facebook.com/SparkInAction/) or in [Manning's live book and community site](https://livebook.manning.com/#!/book/spark-in-action-second-edition?a_aid=jgp).
+Follow me on Twitter to get updates about the book and Apache Spark: [@jgperrin](https://twitter.com/jgperrin). Join the book's community on [Facebook](https://facebook.com/sparkinaction/) or in [Manning's live site](https://forums.manning.com/forums/spark-in-action-second-edition?a_aid=jgp).

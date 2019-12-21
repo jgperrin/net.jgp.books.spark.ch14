@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch14.lab910_addition;
+package net.jgp.books.spark.ch14.lab920_column_as_parameter;
 
 import static org.apache.spark.sql.functions.callUDF;
 import static org.apache.spark.sql.functions.col;
@@ -14,13 +14,12 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-
 /**
  * Additions via UDF.
  * 
  * @author jgp
  */
-public class AdditionApp {
+public class ColumnAdditionApp {
 
   /**
    * main() is your entry point to the application.
@@ -28,7 +27,7 @@ public class AdditionApp {
    * @param args
    */
   public static void main(String[] args) {
-    AdditionApp app = new AdditionApp();
+    ColumnAdditionApp app = new ColumnAdditionApp();
     app.start();
   }
 
@@ -38,57 +37,66 @@ public class AdditionApp {
   private void start() {
     // Creates a session on a local master
     SparkSession spark = SparkSession.builder()
-        .appName("Addition")
+        .appName("Column addition")
         .master("local[*]")
         .getOrCreate();
     spark.udf().register(
-        "add_int",
-        new IntegerAdditionUdf(),
+        "add",
+        new ColumnAdditionUdf(),
         DataTypes.IntegerType);
-    spark.udf().register(
-        "add_string",
-        new StringAdditionUdf(),
-        DataTypes.StringType);
 
     Dataset<Row> df = createDataframe(spark);
     df.show(false);
 
     df = df
         .withColumn(
-            "concat",
-            callUDF("add_string", col("fname"), col("lname")));
+            "sum",
+            callUDF("add", col("fname"), col("lname")));
     df.show(false);
 
-    df = df
-        .withColumn(
-            "score",
-            callUDF("add_int", col("score1"), col("score2")));
-    df.show(false);
   }
 
   private static Dataset<Row> createDataframe(SparkSession spark) {
     StructType schema = DataTypes.createStructType(new StructField[] {
         DataTypes.createStructField(
-            "fname",
+            "rule",
             DataTypes.StringType,
             false),
         DataTypes.createStructField(
-            "lname",
-            DataTypes.StringType,
-            false),
-        DataTypes.createStructField(
-            "score1",
+            "c0",
             DataTypes.IntegerType,
             false),
         DataTypes.createStructField(
-            "score2",
+            "c1",
             DataTypes.IntegerType,
-            false) });
+            false),
+        DataTypes.createStructField(
+            "c2",
+            DataTypes.IntegerType,
+            false),
+        DataTypes.createStructField(
+            "c3",
+            DataTypes.IntegerType,
+            false),
+        DataTypes.createStructField(
+            "c4",
+            DataTypes.IntegerType,
+            false),
+        DataTypes.createStructField(
+            "c5",
+            DataTypes.IntegerType,
+            false),
+        DataTypes.createStructField(
+            "c6",
+            DataTypes.IntegerType,
+            false),
+        DataTypes.createStructField(
+            "c7",
+            DataTypes.IntegerType,
+            false), });
 
     List<Row> rows = new ArrayList<>();
-    rows.add(RowFactory.create("Jean-Georges", "Perrin", 123, 456));
-    rows.add(RowFactory.create("Jacek", "Laskowski", 147, 758));
-    rows.add(RowFactory.create("Holden", "Karau", 258, 369));
+    rows.add(RowFactory.create("c1+c3", 1, 2, 4, 8, 16, 32, 64, 128));
 
     return spark.createDataFrame(rows, schema);
   }
