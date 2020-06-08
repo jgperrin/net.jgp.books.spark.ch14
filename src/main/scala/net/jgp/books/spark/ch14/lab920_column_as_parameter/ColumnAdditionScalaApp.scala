@@ -5,9 +5,10 @@ import java.util.ArrayList
 import org.apache.spark.sql.functions.{array, callUDF}
 import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
 import org.apache.spark.sql._
+import scala.collection.mutable
 
 /**
- * Additions via UDF.
+ * Column Additions via UDF.
  *
  * @author rambabu.posa
  */
@@ -33,10 +34,11 @@ object ColumnAdditionScalaApp {
     spark.udf.register("add", new ColumnAdditionScalaUdf, DataTypes.IntegerType)
 
     var df = createDataframe(spark)
+    df.show(false)
 
-    val cols = List[Column]()
+    var cols = List[Column]()
     for (i <- 0 until COL_COUNT) {
-      cols :+ = df.col("c" + i)
+      cols = cols :+ df.col("c" + i)
     }
 
     val col = array(cols:_*)
@@ -59,9 +61,12 @@ object ColumnAdditionScalaApp {
       DataTypes.createStructField("c7", DataTypes.IntegerType, false)))
 
     val rows = new ArrayList[Row]
-    rows.add(RowFactory.create(1, 2, 4, 8, 16, 32, 64, 128))
-    rows.add(RowFactory.create(0, 0, 0, 0, 0, 0, 0, 0))
-    rows.add(RowFactory.create(1, 1, 1, 1, 1, 1, 1, 1))
+    rows.add(RowFactory.create(int2Integer(1), int2Integer(2), int2Integer(4), int2Integer(8),
+      int2Integer(16), int2Integer(32), int2Integer(64), int2Integer(128)))
+    rows.add(RowFactory.create(int2Integer(0), int2Integer(0), int2Integer(0), int2Integer(0),
+        int2Integer(0), int2Integer(0), int2Integer(0), int2Integer(0)))
+    rows.add(RowFactory.create(int2Integer(1), int2Integer(1), int2Integer(1), int2Integer(1),
+          int2Integer(1), int2Integer(1), int2Integer(1), int2Integer(1)))
 
     spark.createDataFrame(rows, schema)
   }

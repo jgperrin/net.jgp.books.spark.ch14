@@ -59,9 +59,9 @@ object AdditionFail1ScalaApp {
       DataTypes.createStructField("score2", DataTypes.IntegerType, false)))
 
     val rows = new ArrayList[Row]
-    rows.add(RowFactory.create("Jean-Georges", "Perrin", 123, 456))
-    rows.add(RowFactory.create("Jacek", "Laskowski", 147, 758))
-    rows.add(RowFactory.create("Holden", "Karau", 258, 369))
+    rows.add(RowFactory.create("Jean-Georges", "Perrin", int2Integer(123), int2Integer(456)))
+    rows.add(RowFactory.create("Jacek", "Laskowski", int2Integer(147), int2Integer(758)))
+    rows.add(RowFactory.create("Holden", "Karau", int2Integer(258), int2Integer(369)))
 
     spark.createDataFrame(rows, schema)
   }

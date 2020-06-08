@@ -3,11 +3,7 @@ package net.jgp.books.spark.ch14.lab200_library_open
 import java.sql.Timestamp
 import java.util.Calendar
 
-import org.slf4j.LoggerFactory
-
 trait IsOpenScalaService {
-
-  private val log = LoggerFactory.getLogger(classOf[IsOpenScalaService])
 
   def isOpen(hoursMon: String, hoursTue: String, hoursWed: String,
              hoursThu: String, hoursFri: String, hoursSat: String,
@@ -22,7 +18,7 @@ object IsOpenScalaService extends IsOpenScalaService {
     val cal = Calendar.getInstance
     cal.setTimeInMillis(dateTime.getTime)
     val day = cal.get(Calendar.DAY_OF_WEEK)
-    log.trace("Day of the week: {}", day)
+    println(s"Day of the week: ${day}")
     val hours = day match {
       case Calendar.MONDAY =>
         hoursMon
@@ -53,7 +49,7 @@ object IsOpenScalaService extends IsOpenScalaService {
     val event = cal.get(Calendar.HOUR_OF_DAY) * 3600 + cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND)
     val ranges = hours.split(" and ")
     for (i <- 0 until ranges.length) {
-      log.trace("Processing range #{}: {}", i, ranges(i))
+      println(s"Processing range #${i}: ${ranges(i)}")
       val operningHours = ranges(i).split("-")
 
       val start = Integer.valueOf(operningHours(0).substring(0, 2)) * 3600
@@ -62,7 +58,7 @@ object IsOpenScalaService extends IsOpenScalaService {
       val end = Integer.valueOf(operningHours(1).substring(0, 2)) * 3600
       +Integer.valueOf(operningHours(1).substring(3, 5)) * 60
 
-      log.trace("Checking between {} and {}", start, end)
+      println(s"Checking between ${start} and ${end}")
       if (event >= start && event <= end)
         return true
     }
