@@ -11,7 +11,8 @@ public class ColumnAdditionUdf implements UDF1<Seq<Integer>, Integer> {
 
   @Override
   public Integer call(Seq<Integer> t1) throws Exception {
-    List<Integer> integers = scala.collection.JavaConverters.seqAsJavaListConverter(t1).asJava();
+    List<Integer> integers =
+        scala.collection.JavaConverters.seqAsJavaListConverter(t1).asJava();
     int res = 0;
     for (int val : integers) {
       res += val;
