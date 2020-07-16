@@ -37,7 +37,7 @@ The `OpenedLibrariesApp` application does the following:
 
 1.	It acquires a session (a `SparkSession`).
 2.	It asks Spark to load (ingest) a dataset in CSV format.
-3.	Spark stores the contents in a dataframe, then demonstrate hhow to use Custom UDF to check if in range.
+3.	Spark stores the contents in a dataframe, then demonstrate how to use Custom UDF to check if in range.
 
 ## Running the lab in Java
 
