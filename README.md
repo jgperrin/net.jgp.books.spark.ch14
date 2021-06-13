@@ -6,6 +6,7 @@ Welcome to Spark in Action, 2nd edition. Chapter 14 is about **extending data tr
 
 This code is designed to work with Apache Spark v3.1.2.
 
+
 ## Labs
 
 Each chapter has one or more labs. Labs are examples used for teaching in the [book](https://www.manning.com/books/spark-in-action-second-edition?a_aid=jgp). You are encouraged to take ownership of the code and modify it, experiment with it, hence the use of the term **lab**. This chapter has several labs.
@@ -85,21 +86,20 @@ You will need:
 git clone https://github.com/jgperrin/net.jgp.books.spark.ch14
 ```
 
-2. cd net.jgp.books.spark.ch14
+2. Change directory
+
+    cd net.jgp.books.spark.ch14
 
 3. Package application using sbt command
 
-```
-sbt clean assembly
-```
+    sbt clean assembly
 
 4. Run Spark/Scala application using spark-submit command as shown below:
 
-```
-spark-submit --class net.jgp.books.spark.ch14.lab200_library_open.OpenedLibrariesScalaApp target/scala-2.12/SparkInAction2-Chapter14-assembly-1.0.0.jar
-```
+    spark-submit --class net.jgp.books.spark.ch14.lab200_library_open.OpenedLibrariesScalaApp target/scala-2.12/SparkInAction2-Chapter14-assembly-1.0.0.jar
 
 ## Notes
+
  1. [Java] Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10 (published in April 2019).
  2. [Scala, Python] As of MEAP v14, we have introduced Scala and Python examples (published in October 2019).
  
