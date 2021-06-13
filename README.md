@@ -2,9 +2,9 @@ This repository contains the Java labs as well as their Scala and Python ports o
 
 # Spark in Action, 2nd edition – Java, Python, and Scala code for chapter 14
 
-Chapter 14 is about **extending data transformation with UDFs** (user defined functions).
+Welcome to Spark in Action, 2nd edition. Chapter 14 is about **extending data transformation with UDFs** (user defined functions).
 
-This code is designed to work with Apache Spark v3.0.0.
+This code is designed to work with Apache Spark v3.1.2.
 
 ## Labs
 
